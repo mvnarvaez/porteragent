@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "porter-agent"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+matplotlib = "^3.0"
+numpy = "^2.0"
+openai = "^2.0"
+pandas = "^2.0"
+python = "3.9.1"
+python-dotenv = "^1.0"
+yfinance = "^0.2"
+streamlit = "^1.40"
+markdown = "^3.7"
+markdown = "^3.6"
