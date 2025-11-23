@@ -1,3 +1,8 @@
 .env
 __pycache__/
 *.pyc
+.DS_Store
+.cache_universe_info.json
+porter_company_blob_*.json
+*.numbers
+porter_reports/

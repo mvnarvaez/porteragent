@@ -1360,15 +1360,26 @@ try:
 except Exception:
     pass
 
-# -------- Write final HTML to Desktop --------
+# -------- Write final HTML to disk --------
 html_sections.append("</div>")
 final_html = "\n".join(html_sections)
 
+def _resolve_report_path(ticker: str) -> Path:
+    """Return Desktop path when available, else fall back to repo-local reports directory."""
+    fname = f"competitive_advantages_{ticker}.html"
+    desktop = Path.home() / "Desktop"
+    if desktop.exists() and os.access(desktop, os.W_OK):
+        return desktop / fname
+    fallback = Path.cwd() / "porter_reports"
+    fallback.mkdir(parents=True, exist_ok=True)
+    return fallback / fname
+
 try:
-    desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop', f'competitive_advantages_{TICKER}.html')
-    with open(desktop_path, 'w', encoding='utf-8') as f:
+    report_path = _resolve_report_path(TICKER)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(report_path, 'w', encoding='utf-8') as f:
         f.write(final_html)
-    print(f"Saved HTML report to {desktop_path}")
+    print(f"Saved HTML report to {report_path}")
 except Exception as e:
     print("Could not export HTML:", e)
 
