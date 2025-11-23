@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -120,7 +121,8 @@ def render_app():
         env["PORTER_TICKER"] = ticker.upper()
         if peers:
             env["PORTER_PEER_TICKERS"] = ",".join(peers)
-        cmd = ["python3", "porter_agent/main.py"]
+        python_bin = sys.executable or "python3"
+        cmd = [python_bin, "porter_agent/main.py"]
         return subprocess.run(
             cmd,
             cwd=Path(__file__).resolve().parents[1],
