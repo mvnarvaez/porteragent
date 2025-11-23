@@ -35,6 +35,7 @@ CACHE_TTL_DAYS = 30                                 # auto-refresh threshold
 load_dotenv()  # Automatically loads values from .env
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+print(f"[porter_agent] OPENAI_API_KEY present: {bool(OPENAI_API_KEY)}")
 
 if not OPENAI_API_KEY:
     raise EnvironmentError("Please set your OPENAI_API_KEY environment variable before running the notebook.")
