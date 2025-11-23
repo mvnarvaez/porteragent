@@ -65,112 +65,115 @@ def propose_peer_sets(subject_ticker: str, subject_metrics: dict, universe_df: p
     return {"same_sub": same_sub, "global": mega_peers, "label": label}
 
 
-st.set_page_config(page_title="Porter Competitive Advantage Agent", layout="wide")
-st.title("Porter Competitive Advantage Agent")
-st.write(
-    "Enter a ticker, review/edit the suggested peers, then generate the HTML report without touching the CLI."
-)
-
-with st.sidebar:
-    st.header("Run Settings")
-    openai_key = os.getenv("OPENAI_API_KEY")
-    if openai_key:
-        st.success("OPENAI_API_KEY detected", icon="✅")
-    else:
-        st.error("Set OPENAI_API_KEY in your environment before running the report.", icon="⚠️")
-
-ticker_input = st.text_input("Ticker", value="AAPL").strip().upper()
-universe_info = load_universe_info()
-
-peer_section = st.container()
-selected_peers = []
-peer_defaults = []
-label = "N/A"
-
-if ticker_input:
-    subject_info = fetch_subject_info(ticker_input)
-    if not subject_info["sector"] and not subject_info["industry"]:
-        peer_section.warning("Unable to fetch sector/industry data from Yahoo Finance; peer suggestions may be empty.")
-    suggestions = propose_peer_sets(ticker_input, subject_info, universe_info)
-    peer_defaults = suggestions["same_sub"] or suggestions["global"]
-    label = suggestions["label"]
-
-    peer_options = sorted(set(peer_defaults + suggestions["global"]))
-    peer_section.markdown(f"**Suggested peers ({label}):** {', '.join(peer_defaults) if peer_defaults else 'No matches'}")
-    selected_peers = peer_section.multiselect(
-        "Select peers (max 8 recommended)",
-        options=peer_options,
-        default=peer_defaults,
-        key=f"peer-select-{ticker_input}",
-    )
-else:
-    peer_section.info("Enter a ticker to see peer suggestions.")
-
-extra_peers = peer_section.text_input("Add extra tickers (comma-separated)").upper()
-if extra_peers:
-    selected_peers = sorted(set(selected_peers + [p.strip() for p in extra_peers.split(",") if p.strip()]))
-
-
-def run_agent(ticker: str, peers: list[str]):
-    env = os.environ.copy()
-    env["PORTER_TICKER"] = ticker.upper()
-    if peers:
-        env["PORTER_PEER_TICKERS"] = ",".join(peers)
-    cmd = ["python3", "porter_agent/main.py"]
-    return subprocess.run(
-        cmd,
-        cwd=Path(__file__).resolve().parents[1],
-        capture_output=True,
-        text=True,
-        env=env,
+def render_app():
+    st.set_page_config(page_title="Porter Competitive Advantage Agent", layout="wide")
+    st.title("Porter Competitive Advantage Agent")
+    st.write(
+        "Enter a ticker, review/edit the suggested peers, then generate the HTML report without touching the CLI."
     )
 
-
-generate = st.button("Generate Porter Report", disabled=not ticker_input)
-
-if generate:
-    if not selected_peers:
-        st.warning("Please select at least one peer before generating the report.", icon="⚠️")
-    else:
-        with st.spinner("Running Porter Agent..."):
-            result = run_agent(ticker_input, selected_peers)
-
-        stdout = result.stdout or ""
-        stderr = result.stderr or ""
-        if result.returncode != 0:
-            st.error("Porter agent failed. See logs below.", icon="❌")
-            st.code(stdout + "\n" + stderr)
+    with st.sidebar:
+        st.header("Run Settings")
+        openai_key = os.getenv("OPENAI_API_KEY")
+        if openai_key:
+            st.success("OPENAI_API_KEY detected", icon="✅")
         else:
-            st.success("Report generated successfully!", icon="✅")
+            st.error("Set OPENAI_API_KEY in your environment before running the report.", icon="⚠️")
 
-            def extract_path(prefix: str):
-                for line in stdout.splitlines():
-                    if prefix in line:
-                        return line.split(prefix, 1)[-1].strip()
-                return None
+    ticker_input = st.text_input("Ticker", value="AAPL").strip().upper()
+    universe_info = load_universe_info()
 
-            html_path = extract_path("Saved HTML report to")
-            json_path = extract_path("Saved company_blob to")
+    peer_section = st.container()
+    selected_peers = []
+    peer_defaults = []
+    label = "N/A"
 
-            root = Path(__file__).resolve().parents[1]
-            if not html_path:
-                html_path = os.path.join(Path.home(), "Desktop", f"competitive_advantages_{ticker_input}.html")
-            if not json_path:
-                matching = sorted(root.glob(f"porter_company_blob_{ticker_input}_*.json"))
-                if matching:
-                    json_path = str(matching[-1])
+    if ticker_input:
+        subject_info = fetch_subject_info(ticker_input)
+        if not subject_info["sector"] and not subject_info["industry"]:
+            peer_section.warning(
+                "Unable to fetch sector/industry data from Yahoo Finance; peer suggestions may be empty."
+            )
+        suggestions = propose_peer_sets(ticker_input, subject_info, universe_info)
+        peer_defaults = suggestions["same_sub"] or suggestions["global"]
+        label = suggestions["label"]
 
-            html_content = None
-            if html_path and os.path.exists(html_path):
-                with open(html_path, "r", encoding="utf-8") as f:
-                    html_content = f.read()
-                st.download_button(
-                    "Download HTML report",
-                    data=html_content,
-                    file_name=Path(html_path).name,
-                    mime="text/html",
-                )
-                iframe_html = f"""
+        peer_options = sorted(set(peer_defaults + suggestions["global"]))
+        peer_section.markdown(
+            f"**Suggested peers ({label}):** {', '.join(peer_defaults) if peer_defaults else 'No matches'}"
+        )
+        selected_peers = peer_section.multiselect(
+            "Select peers (max 8 recommended)",
+            options=peer_options,
+            default=peer_defaults,
+            key=f"peer-select-{ticker_input}",
+        )
+    else:
+        peer_section.info("Enter a ticker to see peer suggestions.")
+
+    extra_peers = peer_section.text_input("Add extra tickers (comma-separated)").upper()
+    if extra_peers:
+        selected_peers = sorted(set(selected_peers + [p.strip() for p in extra_peers.split(",") if p.strip()]))
+
+    def run_agent(ticker: str, peers: list[str]):
+        env = os.environ.copy()
+        env["PORTER_TICKER"] = ticker.upper()
+        if peers:
+            env["PORTER_PEER_TICKERS"] = ",".join(peers)
+        cmd = ["python3", "porter_agent/main.py"]
+        return subprocess.run(
+            cmd,
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True,
+            text=True,
+            env=env,
+        )
+
+    generate = st.button("Generate Porter Report", disabled=not ticker_input)
+
+    if generate:
+        if not selected_peers:
+            st.warning("Please select at least one peer before generating the report.", icon="⚠️")
+        else:
+            with st.spinner("Running Porter Agent..."):
+                result = run_agent(ticker_input, selected_peers)
+
+            stdout = result.stdout or ""
+            stderr = result.stderr or ""
+            if result.returncode != 0:
+                st.error("Porter agent failed. See logs below.", icon="❌")
+                st.code(stdout + "\n" + stderr)
+            else:
+                st.success("Report generated successfully!", icon="✅")
+
+                def extract_path(prefix: str):
+                    for line in stdout.splitlines():
+                        if prefix in line:
+                            return line.split(prefix, 1)[-1].strip()
+                    return None
+
+                html_path = extract_path("Saved HTML report to")
+                json_path = extract_path("Saved company_blob to")
+
+                root = Path(__file__).resolve().parents[1]
+                if not html_path:
+                    html_path = os.path.join(Path.home(), "Desktop", f"competitive_advantages_{ticker_input}.html")
+                if not json_path:
+                    matching = sorted(root.glob(f"porter_company_blob_{ticker_input}_*.json"))
+                    if matching:
+                        json_path = str(matching[-1])
+
+                html_content = None
+                if html_path and os.path.exists(html_path):
+                    with open(html_path, "r", encoding="utf-8") as f:
+                        html_content = f.read()
+                    st.download_button(
+                        "Download HTML report",
+                        data=html_content,
+                        file_name=Path(html_path).name,
+                        mime="text/html",
+                    )
+                    iframe_html = f"""
 <!DOCTYPE html>
 <html>
 <head>
@@ -189,21 +192,25 @@ if generate:
 </body>
 </html>
 """
-                components.html(iframe_html, height=900, scrolling=True)
-            else:
-                st.warning("Could not locate the HTML file on disk.", icon="ℹ️")
+                    components.html(iframe_html, height=900, scrolling=True)
+                else:
+                    st.warning("Could not locate the HTML file on disk.", icon="ℹ️")
 
-            if json_path and os.path.exists(json_path):
-                with open(json_path, "r", encoding="utf-8") as f:
-                    json_content = f.read()
-                st.download_button(
-                    "Download JSON payload",
-                    data=json_content,
-                    file_name=Path(json_path).name,
-                    mime="application/json",
-                )
+                if json_path and os.path.exists(json_path):
+                    with open(json_path, "r", encoding="utf-8") as f:
+                        json_content = f.read()
+                    st.download_button(
+                        "Download JSON payload",
+                        data=json_content,
+                        file_name=Path(json_path).name,
+                        mime="application/json",
+                    )
 
-            with st.expander("Execution log"):
-                st.code(stdout if stdout else "<no stdout>")
-                if stderr:
-                    st.code(stderr)
+                with st.expander("Execution log"):
+                    st.code(stdout if stdout else "<no stdout>")
+                    if stderr:
+                        st.code(stderr)
+
+
+if __name__ == "__main__":
+    render_app()
