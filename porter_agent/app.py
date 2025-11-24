@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 import streamlit as st
@@ -10,22 +11,70 @@ import yfinance as yf
 
 UNIVERSE_CACHE = Path(".cache_universe_info.json")
 UNIVERSE_CSV = Path("universe.csv")
+DEFAULT_UNIVERSE = [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "META",
+    "NVDA",
+    "TSM",
+    "ORCL",
+    "KO",
+    "PEP",
+    "STZ",
+    "DEO",
+    "JPM",
+    "V",
+    "MA",
+]
+def _load_cached_universe() -> Optional[pd.DataFrame]:
+    if not UNIVERSE_CACHE.exists():
+        return None
+    try:
+        cached = pd.read_json(UNIVERSE_CACHE)
+        if "ticker" in cached.columns:
+            cached["ticker"] = cached["ticker"].astype(str).str.upper()
+            return cached
+    except Exception:
+        return None
+    return None
+
+
+def _load_universe_source() -> pd.DataFrame:
+    if UNIVERSE_CSV.exists():
+        df = pd.read_csv(UNIVERSE_CSV)
+        if "ticker" not in df.columns and "Ticker" in df.columns:
+            df = df.rename(columns={"Ticker": "ticker"})
+        df["ticker"] = df["ticker"].astype(str).str.strip()
+        df = df.dropna(subset=["ticker"]).drop_duplicates(subset=["ticker"])
+        return df[["ticker"]]
+    return pd.DataFrame({"ticker": DEFAULT_UNIVERSE})
+
+
+def _has_metadata(df: Optional[pd.DataFrame]) -> bool:
+    if df is None or df.empty:
+        return False
+    for col in ("sector", "industry"):
+        if col in df.columns:
+            series = df[col].astype(str).str.strip()
+            if series.ne("").any():
+                return True
+    return False
 
 
 @st.cache_data(show_spinner=False)
 def load_universe_info() -> pd.DataFrame:
     """Load cached universe metadata for peer selection."""
-    if UNIVERSE_CACHE.exists():
-        return pd.read_json(UNIVERSE_CACHE)
-    if UNIVERSE_CSV.exists():
-        df = pd.read_csv(UNIVERSE_CSV)
-        if "ticker" not in df.columns and "Ticker" in df.columns:
-            df = df.rename(columns={"Ticker": "ticker"})
-        df["sector"] = ""
-        df["industry"] = ""
-        df["marketCap"] = None
-        return df[["ticker", "sector", "industry", "marketCap"]]
-    return pd.DataFrame(columns=["ticker", "sector", "industry", "marketCap"])
+    cached = _load_cached_universe()
+    if cached is not None:
+        return cached
+
+    base = _load_universe_source()
+    base["sector"] = ""
+    base["industry"] = ""
+    base["marketCap"] = None
+    return base
 
 
 @st.cache_data(show_spinner=False)
@@ -80,9 +129,27 @@ def render_app():
             st.success("OPENAI_API_KEY detected", icon="✅")
         else:
             st.error("Set OPENAI_API_KEY in your environment before running the report.", icon="⚠️")
+        rebuild_requested = st.button(
+            "Refresh peer metadata",
+            help="Use when you've rebuilt .cache_universe_info.json via the CLI.",
+        )
 
     ticker_input = st.text_input("Ticker", value="AAPL").strip().upper()
     universe_info = load_universe_info()
+    if not _has_metadata(universe_info):
+        st.sidebar.warning(
+            "Peer metadata cache is empty. Showing global fallback peers until sector data is rebuilt.",
+            icon="ℹ️",
+        )
+        st.sidebar.info(
+            "To rebuild, run `PEERS_REBUILD_CACHE=1 python porter_agent/main.py` locally, then redeploy Streamlit.",
+            icon="💡",
+        )
+    elif rebuild_requested:
+        st.sidebar.info(
+            "Peer metadata reload detected. Restart the Streamlit app after rebuilding via CLI to pick up the new cache.",
+            icon="ℹ️",
+        )
 
     peer_section = st.container()
     selected_peers = []
@@ -103,18 +170,21 @@ def render_app():
         peer_section.markdown(
             f"**Suggested peers ({label}):** {', '.join(peer_defaults) if peer_defaults else 'No matches'}"
         )
-        selected_peers = peer_section.multiselect(
-            "Select peers (max 8 recommended)",
-            options=peer_options,
-            default=peer_defaults,
-            key=f"peer-select-{ticker_input}",
+        peers_input_default = ", ".join(peer_defaults)
+        peers_input = peer_section.text_input(
+            "Peers (comma-separated, max 8 recommended)",
+            value=peers_input_default,
+            key=f"peer-text-{ticker_input}",
         )
+        selected_peers = [p.strip().upper() for p in peers_input.split(",") if p.strip()]
     else:
         peer_section.info("Enter a ticker to see peer suggestions.")
 
     extra_peers = peer_section.text_input("Add extra tickers (comma-separated)").upper()
     if extra_peers:
-        selected_peers = sorted(set(selected_peers + [p.strip() for p in extra_peers.split(",") if p.strip()]))
+        selected_peers = sorted(
+            set(selected_peers + [p.strip().upper() for p in extra_peers.split(",") if p.strip()])
+        )
 
     def run_agent(ticker: str, peers: list[str]):
         env = os.environ.copy()

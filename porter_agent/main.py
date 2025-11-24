@@ -706,11 +706,20 @@ def compute_forward_pe_monthly_series(ticker: str) -> pd.Series:
       - If annual NI missing, try quarterly NI (TTM via rolling(4))
       - Interpolate EPS monthly, align to prices, compute P/E, cap outliers
     """
-    t = yf.Ticker(ticker)
+    try:
+        t = yf.Ticker(ticker)
+    except Exception as exc:
+        print(f"Warning: unable to initialize yfinance for {ticker}: {exc}")
+        return pd.Series(dtype=float)
+
     info = _safe_info(t)
 
     # Prices
-    price = t.history(period="5y", interval="1mo")
+    try:
+        price = t.history(period="5y", interval="1mo")
+    except Exception as exc:
+        print(f"Warning: unable to fetch price history for {ticker}: {exc}")
+        price = pd.DataFrame()
     if price is None or price.empty:
         return pd.Series(dtype=float)
 
@@ -718,7 +727,10 @@ def compute_forward_pe_monthly_series(ticker: str) -> pd.Series:
     shares = info.get("sharesOutstanding") or np.nan
 
     # Annual NI -> EPS
-    fin_a = t.financials if hasattr(t, "financials") else None
+    try:
+        fin_a = t.financials if hasattr(t, "financials") else None
+    except Exception:
+        fin_a = None
     ni_a = pd.Series(dtype=float)
     if fin_a is not None and not fin_a.empty:
         if "Net Income" in fin_a.index:
@@ -735,7 +747,10 @@ def compute_forward_pe_monthly_series(ticker: str) -> pd.Series:
 
     # If no annual EPS path, try quarterly TTM EPS
     if eps_hist.empty:
-        qfin = t.quarterly_financials
+        try:
+            qfin = t.quarterly_financials
+        except Exception:
+            qfin = None
         ni_q = pd.Series(dtype=float)
         if qfin is not None and not qfin.empty:
             if "Net Income" in qfin.index:
@@ -776,10 +791,18 @@ def compute_forward_pe_now(ticker: str) -> float:
     Forward P/E (now) = last month-end close / info['forwardEps'].
     Fallback to info['forwardPE'] if forwardEps missing/invalid.
     """
-    t = yf.Ticker(ticker)
+    try:
+        t = yf.Ticker(ticker)
+    except Exception as exc:
+        print(f"Warning: unable to initialize yfinance for {ticker}: {exc}")
+        return np.nan
     info = _safe_info(t)
 
-    price = t.history(period="5y", interval="1mo")
+    try:
+        price = t.history(period="5y", interval="1mo")
+    except Exception as exc:
+        print(f"Warning: unable to fetch price history for {ticker}: {exc}")
+        price = pd.DataFrame()
     if price is None or price.empty:
         last_close = np.nan
     else:
