@@ -25,12 +25,9 @@ import base64
 from io import BytesIO
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
-import time
 from pathlib import Path
 
 UNIVERSE_CSV = Path("universe.csv")                 # editable universe list
-UNIVERSE_CACHE = Path(".cache_universe_info.json")  # enriched cache
-CACHE_TTL_DAYS = 30                                 # auto-refresh threshold
 
 load_dotenv()  # Automatically loads values from .env
 
@@ -179,30 +176,45 @@ def _month_end_close_series(ticker_obj, align_index: pd.Index) -> pd.Series:
 
     return closes.reindex(align_index, method="nearest")
 
-def _is_cache_stale(cache_path: Path, ttl_days: int = CACHE_TTL_DAYS) -> bool:
-    """Return True if cache is missing or older than ttl_days."""
-    if not cache_path.exists():
-        return True
-    try:
-        mtime = datetime.fromtimestamp(cache_path.stat().st_mtime, tz=timezone.utc)
-        return (datetime.now(timezone.utc) - mtime) > timedelta(days=ttl_days)
-    except Exception:
-        return True
-
-def load_universe_csv():
-    """Load user-provided universe.csv or fall back to a small cross-sector list."""
+def load_universe_csv() -> pd.DataFrame:
+    """Load user-provided universe.csv with sector/industry metadata."""
+    columns = ["ticker", "sector", "industry", "marketCap"]
     if UNIVERSE_CSV.exists():
         df = pd.read_csv(UNIVERSE_CSV)
-        if "ticker" not in df.columns and "Ticker" in df.columns:
-            df = df.rename(columns={"Ticker": "ticker"})
-        df["ticker"] = df["ticker"].astype(str).str.strip()
+        df.columns = [str(c).strip() for c in df.columns]
+        rename_map = {}
+        for col in df.columns:
+            lower = col.lower()
+            if lower == "ticker":
+                rename_map[col] = "ticker"
+            elif lower == "sector":
+                rename_map[col] = "sector"
+            elif lower == "industry":
+                rename_map[col] = "industry"
+            elif lower in {"marketcap", "market_cap"}:
+                rename_map[col] = "marketCap"
+        if rename_map:
+            df = df.rename(columns=rename_map)
+        df["ticker"] = df["ticker"].astype(str).str.strip().str.upper()
         df = df.dropna(subset=["ticker"]).drop_duplicates(subset=["ticker"])
-        return df[["ticker"]]
-    # Minimal fallback
-    return pd.DataFrame({
+        for col in ["sector", "industry"]:
+            if col not in df.columns:
+                df[col] = ""
+            else:
+                df[col] = df[col].fillna("").astype(str)
+        if "marketCap" not in df.columns:
+            df["marketCap"] = np.nan
+        else:
+            df["marketCap"] = pd.to_numeric(df["marketCap"], errors="coerce")
+        return df[columns]
+
+    fallback = pd.DataFrame({
         "ticker": ["AAPL","MSFT","GOOGL","AMZN","META","NVDA","TSM","ORCL","KO","PEP","STZ","DEO","JPM","V","MA"]
     })
-
+    fallback["sector"] = ""
+    fallback["industry"] = ""
+    fallback["marketCap"] = np.nan
+    return fallback
 
 def _safe_info(t):
     try:
@@ -210,51 +222,6 @@ def _safe_info(t):
     except Exception:
         return {}
 
-
-def build_or_load_enriched_universe_cache(
-    universe_df: pd.DataFrame,
-    rate_limit_sec: float = 0.2,
-    force_rebuild: bool = False
-) -> pd.DataFrame:
-    """
-    Returns DataFrame with: ticker, sector, industry, marketCap.
-    Auto-refreshes when older than CACHE_TTL_DAYS.
-    Env override: PEERS_REBUILD_CACHE=1 to force rebuild.
-    """
-    env_force = os.getenv("PEERS_REBUILD_CACHE", "").strip() in ("1", "true", "True")
-    force_rebuild = force_rebuild or env_force
-
-    if not force_rebuild and UNIVERSE_CACHE.exists() and not _is_cache_stale(UNIVERSE_CACHE):
-        try:
-            cached = pd.read_json(UNIVERSE_CACHE)
-            if "ticker" in cached.columns:
-                return cached
-        except Exception:
-            pass  # fall through
-
-    rows = []
-    tickers = universe_df["ticker"].astype(str).str.upper().tolist()
-    for tk in tickers:
-        info = _safe_info(yf.Ticker(tk))
-        rows.append({
-            "ticker": tk,
-            "sector": info.get("sector"),
-            "industry": info.get("industry"),
-            "marketCap": info.get("marketCap"),
-        })
-        if rate_limit_sec:
-            time.sleep(rate_limit_sec)  # be gentle to Yahoo
-
-    enriched = pd.DataFrame(rows)
-    enriched["ticker"] = enriched["ticker"].astype(str).str.upper()
-    for col in ["sector", "industry"]:
-        enriched[col] = enriched[col].fillna("").astype(str)
-
-    try:
-        enriched.to_json(UNIVERSE_CACHE, orient="records")
-    except Exception:
-        pass
-    return enriched
 
 # -------- Data Fetch --------
 
@@ -347,9 +314,7 @@ def propose_peer_sets_dynamic(subject_ticker, subject_metrics, universe_info_df,
     }
 # -------- Propose GLOBAL peer option sets (dynamic, any sector/industry) --------
 universe_df = load_universe_csv()
-universe_info_df = build_or_load_enriched_universe_cache(universe_df)
-
-peer_sets = propose_peer_sets_dynamic(TICKER, metrics, universe_info_df, max_n=8)
+peer_sets = propose_peer_sets_dynamic(TICKER, metrics, universe_df, max_n=8)
 
 print("\nSuggested peer groups for", TICKER, ":")
 print("[1] Same Sector   (", metrics.get("sector"), "): ", peer_sets["1_same_sector"])

@@ -2,94 +2,86 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 import yfinance as yf
 
-UNIVERSE_CACHE = Path(".cache_universe_info.json")
 UNIVERSE_CSV = Path("universe.csv")
+UNIVERSE_COLUMNS = ["ticker", "sector", "industry", "marketCap"]
 DEFAULT_UNIVERSE = [
-    "AAPL",
-    "MSFT",
-    "GOOGL",
-    "AMZN",
-    "META",
-    "NVDA",
-    "TSM",
-    "ORCL",
-    "KO",
-    "PEP",
-    "STZ",
-    "DEO",
-    "JPM",
-    "V",
-    "MA",
+    {"ticker": "AAPL", "sector": "Information Technology", "industry": "Consumer Electronics", "marketCap": None},
+    {"ticker": "MSFT", "sector": "Information Technology", "industry": "Systems Software", "marketCap": None},
+    {"ticker": "GOOGL", "sector": "Communication Services", "industry": "Internet Content & Information", "marketCap": None},
+    {"ticker": "AMZN", "sector": "Consumer Discretionary", "industry": "Internet Retail", "marketCap": None},
+    {"ticker": "META", "sector": "Communication Services", "industry": "Internet Content & Information", "marketCap": None},
+    {"ticker": "NVDA", "sector": "Information Technology", "industry": "Semiconductors", "marketCap": None},
+    {"ticker": "TSM", "sector": "Information Technology", "industry": "Semiconductors", "marketCap": None},
+    {"ticker": "ORCL", "sector": "Information Technology", "industry": "Software Infrastructure", "marketCap": None},
+    {"ticker": "KO", "sector": "Consumer Staples", "industry": "Beverages—Non-Alcoholic", "marketCap": None},
+    {"ticker": "PEP", "sector": "Consumer Staples", "industry": "Beverages—Non-Alcoholic", "marketCap": None},
+    {"ticker": "STZ", "sector": "Consumer Staples", "industry": "Beverages—Wineries & Distilleries", "marketCap": None},
+    {"ticker": "DEO", "sector": "Consumer Staples", "industry": "Beverages—Wineries & Distilleries", "marketCap": None},
+    {"ticker": "JPM", "sector": "Financials", "industry": "Banks—Diversified", "marketCap": None},
+    {"ticker": "V", "sector": "Financials", "industry": "Credit Services", "marketCap": None},
+    {"ticker": "MA", "sector": "Financials", "industry": "Credit Services", "marketCap": None},
 ]
-def _load_cached_universe() -> Optional[pd.DataFrame]:
-    if not UNIVERSE_CACHE.exists():
-        return None
-    try:
-        cached = pd.read_json(UNIVERSE_CACHE)
-        if "ticker" in cached.columns:
-            cached["ticker"] = cached["ticker"].astype(str).str.upper()
-            return cached
-    except Exception:
-        return None
-    return None
 
 
-def _load_universe_source() -> pd.DataFrame:
+def load_universe_info() -> pd.DataFrame:
+    """Load peer universe metadata from universe.csv or fallback defaults."""
     if UNIVERSE_CSV.exists():
         df = pd.read_csv(UNIVERSE_CSV)
-        if "ticker" not in df.columns and "Ticker" in df.columns:
-            df = df.rename(columns={"Ticker": "ticker"})
-        df["ticker"] = df["ticker"].astype(str).str.strip()
+        df.columns = [str(c).strip() for c in df.columns]
+        rename_map = {}
+        for col in df.columns:
+            lower = col.lower()
+            if lower == "ticker":
+                rename_map[col] = "ticker"
+            elif lower == "sector":
+                rename_map[col] = "sector"
+            elif lower == "industry":
+                rename_map[col] = "industry"
+            elif lower in {"marketcap", "market_cap"}:
+                rename_map[col] = "marketCap"
+        if rename_map:
+            df = df.rename(columns=rename_map)
+        df["ticker"] = df["ticker"].astype(str).str.strip().str.upper()
         df = df.dropna(subset=["ticker"]).drop_duplicates(subset=["ticker"])
-        return df[["ticker"]]
-    return pd.DataFrame({"ticker": DEFAULT_UNIVERSE})
+        for col in ["sector", "industry"]:
+            if col not in df.columns:
+                df[col] = ""
+            else:
+                df[col] = df[col].fillna("").astype(str)
+        if "marketCap" not in df.columns:
+            df["marketCap"] = None
+        else:
+            df["marketCap"] = pd.to_numeric(df["marketCap"], errors="coerce")
+        return df[UNIVERSE_COLUMNS]
+
+    return pd.DataFrame(DEFAULT_UNIVERSE)
 
 
-def _has_metadata(df: Optional[pd.DataFrame]) -> bool:
-    if df is None or df.empty:
-        return False
-    for col in ("sector", "industry"):
-        if col in df.columns:
-            series = df[col].astype(str).str.strip()
-            if series.ne("").any():
-                return True
-    return False
-
-
-@st.cache_data(show_spinner=False)
-def load_universe_info() -> pd.DataFrame:
-    """Load cached universe metadata for peer selection."""
-    cached = _load_cached_universe()
-    if cached is not None:
-        return cached
-
-    base = _load_universe_source()
-    base["sector"] = ""
-    base["industry"] = ""
-    base["marketCap"] = None
-    return base
-
-
-@st.cache_data(show_spinner=False)
-def fetch_subject_info(ticker: str) -> dict:
-    """Fetch sector/industry info for the selected ticker."""
+def fetch_subject_info(ticker: str, universe_df: pd.DataFrame) -> dict:
+    """Fetch sector/industry info, falling back to universe.csv metadata."""
+    ticker_u = ticker.upper()
     info = {}
     try:
-        info = yf.Ticker(ticker).info
+        info = yf.Ticker(ticker_u).info
     except Exception:
-        pass
-    return {
-        "ticker": ticker.upper(),
-        "sector": (info.get("sector") or "").strip(),
-        "industry": (info.get("industry") or "").strip(),
-    }
+        info = {}
+
+    sector = (info.get("sector") or "").strip()
+    industry = (info.get("industry") or "").strip()
+
+    if (not sector or not industry) and not universe_df.empty:
+        row = universe_df[universe_df["ticker"] == ticker_u]
+        if not row.empty:
+            sector = sector or row.iloc[0]["sector"]
+            industry = industry or row.iloc[0]["industry"]
+
+    return {"ticker": ticker_u, "sector": sector, "industry": industry}
 
 
 def propose_peer_sets(subject_ticker: str, subject_metrics: dict, universe_df: pd.DataFrame, max_n: int = 8):
@@ -129,27 +121,9 @@ def render_app():
             st.success("OPENAI_API_KEY detected", icon="✅")
         else:
             st.error("Set OPENAI_API_KEY in your environment before running the report.", icon="⚠️")
-        rebuild_requested = st.button(
-            "Refresh peer metadata",
-            help="Use when you've rebuilt .cache_universe_info.json via the CLI.",
-        )
 
     ticker_input = st.text_input("Ticker", value="AAPL").strip().upper()
     universe_info = load_universe_info()
-    if not _has_metadata(universe_info):
-        st.sidebar.warning(
-            "Peer metadata cache is empty. Showing global fallback peers until sector data is rebuilt.",
-            icon="ℹ️",
-        )
-        st.sidebar.info(
-            "To rebuild, run `PEERS_REBUILD_CACHE=1 python porter_agent/main.py` locally, then redeploy Streamlit.",
-            icon="💡",
-        )
-    elif rebuild_requested:
-        st.sidebar.info(
-            "Peer metadata reload detected. Restart the Streamlit app after rebuilding via CLI to pick up the new cache.",
-            icon="ℹ️",
-        )
 
     peer_section = st.container()
     selected_peers = []
@@ -157,16 +131,15 @@ def render_app():
     label = "N/A"
 
     if ticker_input:
-        subject_info = fetch_subject_info(ticker_input)
+        subject_info = fetch_subject_info(ticker_input, universe_info)
         if not subject_info["sector"] and not subject_info["industry"]:
             peer_section.warning(
-                "Unable to fetch sector/industry data from Yahoo Finance; peer suggestions may be empty."
+                "Ticker not found in universe.csv. Showing global peer defaults until metadata is provided."
             )
         suggestions = propose_peer_sets(ticker_input, subject_info, universe_info)
         peer_defaults = suggestions["same_sub"] or suggestions["global"]
         label = suggestions["label"]
 
-        peer_options = sorted(set(peer_defaults + suggestions["global"]))
         peer_section.markdown(
             f"**Suggested peers ({label}):** {', '.join(peer_defaults) if peer_defaults else 'No matches'}"
         )

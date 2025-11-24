@@ -1,504 +1,504 @@
-Ticker
-A
-AAPL
-ABBV
-ABNB
-ABT
-ACGL
-ACN
-ADBE
-ADI
-ADM
-ADP
-ADSK
-AEE
-AEP
-AES
-AFL
-AIG
-AIZ
-AJG
-AKAM
-ALB
-ALGN
-ALL
-ALLE
-AMAT
-AMCR
-AMD
-AME
-AMGN
-AMP
-AMT
-AMZN
-ANET
-ANSS
-AON
-AOS
-APA
-APD
-APH
-APTV
-ARE
-ASML
-ATO
-ATVI
-AVB
-AVGO
-AVY
-AWK
-AXON
-AXP
-AYI
-AZN
-AZO
-BA
-BAC
-BALL
-BAX
-BBWI
-BBY
-BDX
-BEN
-BF-B
-BG
-BIIB
-BK
-BKNG
-BKR
-BLDR
-BLK
-BMY
-BR
-BRO
-BSX
-BWA
-BXP
-C
-CAG
-CAH
-CARR
-CAT
-CB
-CBOE
-CBRE
-CCI
-CCL
-CDNS
-CDW
-CE
-CEG
-CF
-CFG
-CHD
-CHRW
-CHTR
-CI
-CINF
-CL
-CLX
-CMA
-CMCSA
-CME
-CMG
-CMI
-CMS
-CNC
-CNP
-COF
-COO
-COST
-CPB
-CPRT
-CPT
-CRL
-CRM
-CRWD
-CSCO
-CSGP
-CSX
-CTAS
-CTLT
-CTRA
-CTSH
-CTVA
-CVS
-CVX
-CZR
-D
-DAL
-DD
-DDOG
-DE
-DFS
-DG
-DGX
-DHI
-DHR
-DIS
-DLR
-DLTR
-DOV
-DOW
-DPZ
-DRI
-DTE
-DUK
-DVA
-DVN
-DXC
-DXCM
-EA
-EBAY
-ECL
-ED
-EFX
-EG
-EIX
-EL
-ELV
-EMN
-EMR
-ENPH
-EOG
-EPAM
-EQIX
-EQR
-EQT
-ES
-ESS
-ETN
-ETR
-EW
-EXC
-EXPD
-EXPE
-EXR
-F
-FANG
-FAST
-FCX
-FDS
-FDX
-FE
-FFIV
-FI
-FICO
-FIS
-FITB
-FLT
-FMC
-FOX
-FOXA
-FRT
-FSLR
-FTNT
-FTV
-GD
-GE
-GEHC
-GEN
-GFS
-GILD
-GIS
-GL
-GLW
-GM
-GNRC
-GOOG
-GOOGL
-GPC
-GPN
-GRMN
-GS
-GWW
-HAL
-HAS
-HBAN
-HCA
-HD
-HES
-HIG
-HII
-HLT
-HOLX
-HON
-HPE
-HPQ
-HRL
-HSIC
-HST
-HSY
-HUBB
-HUM
-HWM
-IBM
-ICE
-IDXX
-IEX
-IFF
-ILMN
-INCY
-INTC
-INTU
-IP
-IPG
-IQV
-IR
-IRM
-ISRG
-IT
-ITW
-IVZ
-J
-JBHT
-JBL
-JCI
-JD
-JKHY
-JNJ
-JNPR
-JPM
-K
-KDP
-KEY
-KEYS
-KHC
-KIM
-KLAC
-KMB
-KMI
-KMX
-KO
-KR
-L
-LCID
-LDOS
-LEN
-LH
-LHX
-LIN
-LKQ
-LLY
-LMT
-LNC
-LNT
-LOW
-LRCX
-LULU
-LUMN
-LUV
-LVS
-LW
-LYB
-LYV
-MA
-MAA
-MAR
-MAS
-MCD
-MCHP
-MCK
-MCO
-MDLZ
-MDT
-MELI
-MET
-META
-MGM
-MHK
-MKC
-MKTX
-MLM
-MMC
-MMM
-MNST
-MO
-MOS
-MPC
-MPWR
-MRK
-MRNA
-MRO
-MS
-MSCI
-MSFT
-MSI
-MTB
-MTD
-MU
-NCLH
-NDAQ
-NDSN
-NEE
-NEM
-NFLX
-NI
-NKE
-NOC
-NPSNY
-NRG
-NSC
-NTAP
-NTRS
-NUE
-NVDA
-NVR
-NWS
-NWSA
-NXPI
-O
-ODFL
-OGN
-OKE
-OMC
-ON
-ORCL
-ORLY
-OTIS
-OXY
-PANW
-PARA
-PAYC
-PAYX
-PCAR
-PCG
-PDD
-PEAK
-PEG
-PENN
-PEP
-PFE
-PFG
-PG
-PGR
-PH
-PHM
-PKG
-PLD
-PM
-PNC
-PNR
-PNW
-PODD
-POOL
-PPG
-PPL
-PRU
-PSA
-PSX
-PTC
-PYPL
-QCOM
-QRVO
-RCL
-REG
-REGN
-RF
-RHI
-RIVN
-RJF
-RL
-RMD
-ROK
-ROL
-ROP
-ROST
-RSG
-RTX
-SBAC
-SBUX
-SCHW
-SEDG
-SEE
-SGEN
-SHW
-SIRI
-SJM
-SLB
-SNPS
-SO
-SPG
-SPGI
-SRE
-STE
-STLD
-STT
-STX
-STZ
-SWK
-SWKS
-SYF
-SYK
-SYY
-T
-TAP
-TDG
-TDY
-TEAM
-TER
-TFC
-TFX
-TGT
-TJX
-TMO
-TMUS
-TPR
-TRGP
-TRMB
-TROW
-TRV
-TSCO
-TSLA
-TSN
-TT
-TTWO
-TXN
-TXT
-TYL
-UAL
-UDR
-UHS
-ULTA
-UNH
-UNP
-UPS
-URI
-USB
-V
-VFC
-VICI
-VLO
-VMC
-VRSK
-VRSN
-VRTX
-VTR
-VZ
-WAB
-WAT
-WBA
-WBD
-WDAY
-WDC
-WEC
-WELL
-WFC
-WHR
-WM
-WMB
-WMT
-WRB
-WRK
-WST
-WTW
-WY
-WYNN
-XEL
-XOM
-XYL
-YUM
-ZBH
-ZBRA
-ZS
-ZTS
+Ticker,Sector,Industry,MarketCap
+A,Healthcare,Diagnostics & Research,42964791296
+AAPL,Technology,Consumer Electronics,4029017227264
+ABBV,Healthcare,Drug Manufacturers - General,417597620224
+ABNB,Consumer Cyclical,Travel Services,69954043904
+ABT,Healthcare,Medical Devices,222970200064
+ACGL,Financial Services,Insurance - Diversified,34507948032
+ACN,Technology,Information Technology Services,156865445888
+ADBE,Technology,Software - Application,137521397760
+ADI,Technology,Semiconductors,114291089408
+ADM,Consumer Defensive,Farm Products,28175804416
+ADP,Technology,Software - Application,102536249344
+ADSK,Technology,Software - Application,62215069696
+AEE,Utilities,Utilities - Regulated Electric,28274833408
+AEP,Utilities,Utilities - Regulated Electric,64681492480
+AES,Utilities,Utilities - Diversified,9791663104
+AFL,Financial Services,Insurance - Life,59355598848
+AIG,Financial Services,Insurance - Diversified,42082131968
+AIZ,Financial Services,Insurance - Property & Casualty,11445158912
+AJG,Financial Services,Insurance Brokers,64563343360
+AKAM,Technology,Software - Infrastructure,12805444608
+ALB,Basic Materials,Specialty Chemicals,13749426176
+ALGN,Healthcare,Medical Instruments & Supplies,10333656064
+ALL,Financial Services,Insurance - Property & Casualty,56474464256
+ALLE,Industrials,Security & Protection Services,14012023808
+AMAT,Technology,Semiconductor Equipment & Materials,178451890176
+AMCR,Consumer Cyclical,Packaging & Containers,19621058560
+AMD,Technology,Semiconductors,331762302976
+AME,Industrials,Specialty Industrial Machinery,45040640000
+AMGN,Healthcare,Drug Manufacturers - General,181758754816
+AMP,Financial Services,Asset Management,42192183296
+AMT,Real Estate,REIT - Specialty,84060405760
+AMZN,Consumer Cyclical,Internet Retail,2359223910400
+ANET,Technology,Computer Hardware,147877855232
+ANSS,,,
+AON,Financial Services,Insurance Brokers,74716774400
+AOS,Industrials,Specialty Industrial Machinery,9122436096
+APA,Energy,Oil & Gas E&P,8568986112
+APD,Basic Materials,Specialty Chemicals,57288048640
+APH,Technology,Electronic Components,161085718528
+APTV,Consumer Cyclical,Auto Parts,16142533632
+ARE,Real Estate,REIT - Office,8795067392
+ASML,Technology,Semiconductor Equipment & Materials,375171907584
+ATO,Utilities,Utilities - Regulated Gas,28322207744
+ATVI,,,
+AVB,Real Estate,REIT - Residential,25725763584
+AVGO,Technology,Semiconductors,1606548586496
+AVY,Consumer Cyclical,Packaging & Containers,13175773184
+AWK,Utilities,Utilities - Regulated Water,25900703744
+AXON,Industrials,Aerospace & Defense,41190473728
+AXP,Financial Services,Credit Services,245569896448
+AYI,Industrials,Electrical Equipment & Parts,10706077696
+AZN,Healthcare,Drug Manufacturers - General,282149257216
+AZO,Consumer Cyclical,Auto Parts,64958169088
+BA,Industrials,Aerospace & Defense,136589156352
+BAC,Financial Services,Banks - Diversified,381902225408
+BALL,Consumer Cyclical,Packaging & Containers,13572065280
+BAX,Healthcare,Medical Instruments & Supplies,9412361216
+BBWI,Consumer Cyclical,Specialty Retail,3040115712
+BBY,Consumer Cyclical,Specialty Retail,16157453312
+BDX,Healthcare,Medical Instruments & Supplies,55238844416
+BEN,Financial Services,Asset Management,11294642176
+BF-B,Consumer Defensive,Beverages - Wineries & Distilleries,13463668736
+BG,Consumer Defensive,Farm Products,18921865216
+BIIB,Healthcare,Drug Manufacturers - General,25716908032
+BK,Financial Services,Banks - Diversified,75058782208
+BKNG,Consumer Cyclical,Travel Services,154530332672
+BKR,Energy,Oil & Gas Equipment & Services,48233508864
+BLDR,Industrials,Building Products & Equipment,11237198848
+BLK,Financial Services,Asset Management,157434724352
+BMY,Healthcare,Drug Manufacturers - General,94153580544
+BR,Technology,Information Technology Services,26659407872
+BRO,Financial Services,Insurance Brokers,27422918656
+BSX,Healthcare,Medical Devices,143618981888
+BWA,Consumer Cyclical,Auto Parts,9296237568
+BXP,Real Estate,REIT - Office,12389833728
+C,Financial Services,Banks - Diversified,181696626688
+CAG,Consumer Defensive,Packaged Foods,8500308992
+CAH,Healthcare,Medical Distribution,49771409408
+CARR,Industrials,Building Products & Equipment,44602105856
+CAT,Industrials,Farm & Heavy Construction Machinery,258875473920
+CB,Financial Services,Insurance - Property & Casualty,118925336576
+CBOE,Financial Services,Financial Data & Stock Exchanges,26433204224
+CBRE,Real Estate,Real Estate Services,46659604480
+CCI,Real Estate,REIT - Specialty,39197466624
+CCL,Consumer Cyclical,Travel Services,36012228608
+CDNS,Technology,Software - Application,81905033216
+CDW,Technology,Information Technology Services,18374715392
+CE,Basic Materials,Chemicals,4153520640
+CEG,Utilities,Utilities - Independent Power Producers,105627443200
+CF,Basic Materials,Agricultural Inputs,12721356800
+CFG,Financial Services,Banks - Regional,22559551488
+CHD,Consumer Defensive,Household & Personal Products,20468002816
+CHRW,Industrials,Integrated Freight & Logistics,17919045632
+CHTR,Communication Services,Telecom Services,27727972352
+CI,Healthcare,Healthcare Plans,74285023232
+CINF,Financial Services,Insurance - Property & Casualty,25961613312
+CL,Consumer Defensive,Household & Personal Products,65409310720
+CLX,Consumer Defensive,Household & Personal Products,12676200448
+CMA,Financial Services,Banks - Regional,10031413248
+CMCSA,Communication Services,Telecom Services,100981850112
+CME,Financial Services,Financial Data & Stock Exchanges,98476187648
+CMG,Consumer Cyclical,Restaurants,42412191744
+CMI,Industrials,Specialty Industrial Machinery,65223512064
+CMS,Utilities,Utilities - Regulated Electric,22531835904
+CNC,Healthcare,Healthcare Plans,17940408320
+CNP,Utilities,Utilities - Regulated Electric,25827471360
+COF,Financial Services,Credit Services,132936458240
+COO,Healthcare,Medical Instruments & Supplies,15057209344
+COST,Consumer Defensive,Discount Stores,398690353152
+CPB,Consumer Defensive,Packaged Foods,9434442752
+CPRT,Industrials,Specialty Business Services,39419891712
+CPT,Real Estate,REIT - Residential,11244112896
+CRL,Healthcare,Diagnostics & Research,8250481664
+CRM,Technology,Software - Application,217117163520
+CRWD,Technology,Software - Infrastructure,123136163840
+CSCO,Technology,Communication Equipment,300678283264
+CSGP,Real Estate,Real Estate Services,28502081536
+CSX,Industrials,Railroads,63907414016
+CTAS,Industrials,Specialty Business Services,74868211712
+CTLT,,,
+CTRA,Energy,Oil & Gas E&P,19650854912
+CTSH,Technology,Information Technology Services,37108326400
+CTVA,Basic Materials,Agricultural Inputs,44508217344
+CVS,Healthcare,Healthcare Plans,99053813760
+CVX,Energy,Oil & Gas Integrated,302183055360
+CZR,Consumer Cyclical,Resorts & Casinos,4434379264
+D,Utilities,Utilities - Regulated Electric,52490051584
+DAL,Industrials,Airlines,38244028416
+DD,Basic Materials,Specialty Chemicals,16147309568
+DDOG,Technology,Software - Application,55248179200
+DE,Industrials,Farm & Heavy Construction Machinery,131715301376
+DFS,,,
+DG,Consumer Defensive,Discount Stores,22384783360
+DGX,Healthcare,Diagnostics & Research,21386233856
+DHI,Consumer Cyclical,Residential Construction,43737702400
+DHR,Healthcare,Diagnostics & Research,162822963200
+DIS,Communication Services,Entertainment,187488534528
+DLR,Real Estate,REIT - Specialty,54966558720
+DLTR,Consumer Defensive,Discount Stores,21249409024
+DOV,Industrials,Specialty Industrial Machinery,25178587136
+DOW,Basic Materials,Chemicals,15779036160
+DPZ,Consumer Cyclical,Restaurants,13830790144
+DRI,Consumer Cyclical,Restaurants,20371462144
+DTE,Utilities,Utilities - Regulated Electric,28197122048
+DUK,Utilities,Utilities - Regulated Electric,95496806400
+DVA,Healthcare,Medical Care Facilities,8597874688
+DVN,Energy,Oil & Gas E&P,22630621184
+DXC,Technology,Information Technology Services,2253593344
+DXCM,Healthcare,Medical Devices,23619512320
+EA,Communication Services,Electronic Gaming & Multimedia,50193801216
+EBAY,Consumer Cyclical,Internet Retail,36943880192
+ECL,Basic Materials,Specialty Chemicals,75747704832
+ED,Utilities,Utilities - Regulated Electric,36151312384
+EFX,Industrials,Consulting Services,26330974208
+EG,Financial Services,Insurance - Reinsurance,13069448192
+EIX,Utilities,Utilities - Regulated Electric,22540826624
+EL,Consumer Defensive,Household & Personal Products,32396388352
+ELV,Healthcare,Healthcare Plans,72446615552
+EMN,Basic Materials,Specialty Chemicals,6835973632
+EMR,Industrials,Specialty Industrial Machinery,72162213888
+ENPH,Technology,Solar,3524051968
+EOG,Energy,Oil & Gas E&P,58404917248
+EPAM,Technology,Information Technology Services,10080026624
+EQIX,,,
+EQR,Real Estate,REIT - Residential,23830171648
+EQT,Energy,Oil & Gas E&P,35590541312
+ES,Utilities,Utilities - Regulated Electric,24218460160
+ESS,Real Estate,REIT - Residential,18040686592
+ETN,Industrials,Specialty Industrial Machinery,129134698496
+ETR,Utilities,Utilities - Regulated Electric,41846128640
+EW,Healthcare,Medical Devices,49979822080
+EXC,Utilities,Utilities - Regulated Electric,46206918656
+EXPD,Industrials,Integrated Freight & Logistics,19436251136
+EXPE,Consumer Cyclical,Travel Services,30618370048
+EXR,Real Estate,REIT - Industrial,29131728896
+F,Consumer Cyclical,Auto Manufacturers,51121119232
+FANG,Energy,Oil & Gas E&P,42392346624
+FAST,Industrials,Industrial Distribution,45818105856
+FCX,Basic Materials,Copper,57250553856
+FDS,Financial Services,Financial Data & Stock Exchanges,10366069760
+FDX,Industrials,Integrated Freight & Logistics,63573475328
+FE,Utilities,Utilities - Regulated Electric,27086737408
+FFIV,Technology,Software - Infrastructure,13514783744
+FI,Technology,Information Technology Services,34314950656
+FICO,Technology,Software - Application,42923335680
+FIS,Technology,Information Technology Services,33468796928
+FITB,Financial Services,Banks - Regional,28040118272
+FLT,,,
+FMC,Basic Materials,Agricultural Inputs,1592730880
+FOX,Communication Services,Entertainment,27849775104
+FOXA,Communication Services,Entertainment,29162598400
+FRT,Real Estate,REIT - Retail,8503721472
+FSLR,Technology,Solar,26817378304
+FTNT,Technology,Software - Infrastructure,60423913472
+FTV,Technology,Scientific & Technical Instruments,17870925824
+GD,Industrials,Aerospace & Defense,91932794880
+GE,Industrials,Aerospace & Defense,304812687360
+GEHC,Healthcare,Health Information Services,34904166400
+GEN,Technology,Software - Infrastructure,16367645696
+GFS,Technology,Semiconductors,18887622656
+GILD,Healthcare,Drug Manufacturers - General,157135781888
+GIS,Consumer Defensive,Packaged Foods,25841369088
+GL,Financial Services,Insurance - Life,10726488064
+GLW,Technology,Electronic Components,68125855744
+GM,Consumer Cyclical,Auto Manufacturers,66959634432
+GNRC,Industrials,Specialty Industrial Machinery,8570220544
+GOOG,Communication Services,Internet Content & Information,3617324793856
+GOOGL,Communication Services,Internet Content & Information,3629518422016
+GPC,Consumer Cyclical,Auto Parts,17884045312
+GPN,Industrials,Specialty Business Services,17829195776
+GRMN,Technology,Scientific & Technical Instruments,37003112448
+GS,Financial Services,Capital Markets,234315218944
+GWW,Industrials,Industrial Distribution,45543473152
+HAL,Energy,Oil & Gas Equipment & Services,22014185472
+HAS,Consumer Cyclical,Leisure,11114691584
+HBAN,Financial Services,Banks - Regional,24890165248
+HCA,Healthcare,Medical Care Facilities,114890809344
+HD,Consumer Cyclical,Home Improvement Retail,341736128512
+HES,,,
+HIG,Financial Services,Insurance - Property & Casualty,38365872128
+HII,Industrials,Aerospace & Defense,11987864576
+HLT,Consumer Cyclical,Lodging,64555986944
+HOLX,Healthcare,Medical Instruments & Supplies,16575233024
+HON,Industrials,Conglomerates,128048726016
+HPE,Technology,Communication Equipment,27075117056
+HPQ,Technology,Computer Hardware,22504978432
+HRL,Consumer Defensive,Packaged Foods,12479465472
+HSIC,Healthcare,Medical Distribution,8901100544
+HST,Real Estate,REIT - Hotel & Motel,12134362112
+HSY,Consumer Defensive,Confectioners,37718032384
+HUBB,Industrials,Electrical Equipment & Parts,22418581504
+HUM,Healthcare,Healthcare Plans,27314016256
+HWM,Industrials,Aerospace & Defense,79405203456
+IBM,Technology,Information Technology Services,278027665408
+ICE,Financial Services,Financial Data & Stock Exchanges,88399298560
+IDXX,Healthcare,Diagnostics & Research,58076205056
+IEX,Industrials,Specialty Industrial Machinery,12847775744
+IFF,Basic Materials,Specialty Chemicals,17286563840
+ILMN,Healthcare,Diagnostics & Research,19035744256
+INCY,Healthcare,Biotechnology,20036694016
+INTC,Technology,Semiconductors,164564992000
+INTU,Technology,Software - Application,184889540608
+IP,Consumer Cyclical,Packaging & Containers,19891202048
+IPG,Communication Services,Advertising Agencies,9420371968
+IQV,Healthcare,Diagnostics & Research,38300467200
+IR,Industrials,Specialty Industrial Machinery,31215921152
+IRM,Real Estate,REIT - Specialty,25131018240
+ISRG,Healthcare,Medical Instruments & Supplies,201323986944
+IT,Technology,Information Technology Services,17735806976
+ITW,Industrials,Specialty Industrial Machinery,72224956416
+IVZ,Financial Services,Asset Management,10355278848
+J,Industrials,Engineering & Construction,15392711680
+JBHT,Industrials,Integrated Freight & Logistics,16110303232
+JBL,Technology,Electronic Components,21109614592
+JCI,Industrials,Building Products & Equipment,74305470464
+JD,Consumer Cyclical,Internet Retail,42683498496
+JKHY,Technology,Information Technology Services,12411215872
+JNJ,Healthcare,Drug Manufacturers - General,491255267328
+JNPR,,,
+JPM,Financial Services,Banks - Diversified,819481608192
+K,Consumer Defensive,Packaged Foods,29034977280
+KDP,Consumer Defensive,Beverages - Non-Alcoholic,37687095296
+KEY,Financial Services,Banks - Regional,19539912704
+KEYS,Technology,Scientific & Technical Instruments,29724923904
+KHC,Consumer Defensive,Packaged Foods,29934649344
+KIM,Real Estate,REIT - Retail,13787693056
+KLAC,Technology,Semiconductor Equipment & Materials,144473735168
+KMB,Consumer Defensive,Household & Personal Products,34904870912
+KMI,Energy,Oil & Gas Midstream,60024033280
+KMX,Consumer Cyclical,Auto & Truck Dealerships,5302049792
+KO,Consumer Defensive,Beverages - Non-Alcoholic,313952501760
+KR,Consumer Defensive,Grocery Stores,43776520192
+L,Financial Services,Insurance - Property & Casualty,22070169600
+LCID,Consumer Cyclical,Auto Manufacturers,3987271936
+LDOS,Technology,Information Technology Services,23926171648
+LEN,Consumer Cyclical,Residential Construction,31408330752
+LH,Healthcare,Diagnostics & Research,22074685440
+LHX,Industrials,Aerospace & Defense,51971194880
+LIN,Basic Materials,Specialty Chemicals,193537720320
+LKQ,Consumer Cyclical,Auto Parts,7605586432
+LLY,Healthcare,Drug Manufacturers - General,949975187456
+LMT,Industrials,Aerospace & Defense,107576025088
+LNC,Financial Services,Insurance - Life,7584266752
+LNT,Utilities,Utilities - Regulated Electric,17549053952
+LOW,Consumer Cyclical,Home Improvement Retail,131395657728
+LRCX,Technology,Semiconductor Equipment & Materials,179886260224
+LULU,Consumer Cyclical,Apparel Retail,20156456960
+LUMN,Communication Services,Telecom Services,7788409856
+LUV,Industrials,Airlines,17226156032
+LVS,Consumer Cyclical,Resorts & Casinos,44145831936
+LW,Consumer Defensive,Packaged Foods,8037980160
+LYB,Basic Materials,Specialty Chemicals,14419908608
+LYV,Communication Services,Entertainment,30333495296
+MA,Financial Services,Credit Services,488528019456
+MAA,Real Estate,REIT - Residential,16037395456
+MAR,Consumer Cyclical,Lodging,80308084736
+MAS,Industrials,Building Products & Equipment,13030793216
+MCD,Consumer Cyclical,Restaurants,220753526784
+MCHP,Technology,Semiconductors,27508746240
+MCK,Healthcare,Medical Distribution,107720622080
+MCO,Financial Services,Financial Data & Stock Exchanges,86029369344
+MDLZ,Consumer Defensive,Confectioners,73754894336
+MDT,Healthcare,Medical Devices,129800740864
+MELI,Consumer Cyclical,Internet Retail,98950127616
+MET,Financial Services,Insurance - Life,49923506176
+META,Communication Services,Internet Content & Information,1497823576064
+MGM,Consumer Cyclical,Resorts & Casinos,8902634496
+MHK,Consumer Cyclical,"Furnishings, Fixtures & Appliances",6830160896
+MKC,Consumer Defensive,Packaged Foods,18292486144
+MKTX,Financial Services,Capital Markets,6042469376
+MLM,Basic Materials,Building Materials,36376064000
+MMC,Financial Services,Insurance Brokers,88944615424
+MMM,Industrials,Conglomerates,89529720832
+MNST,Consumer Defensive,Beverages - Non-Alcoholic,70384607232
+MO,Consumer Defensive,Tobacco,97752850432
+MOS,Basic Materials,Agricultural Inputs,7671748096
+MPC,Energy,Oil & Gas Refining & Marketing,57952350208
+MPWR,Technology,Semiconductors,41791672320
+MRK,Healthcare,Drug Manufacturers - General,244183302144
+MRNA,Healthcare,Biotechnology,9268201472
+MRO,,,
+MS,Financial Services,Capital Markets,252492414976
+MSCI,Financial Services,Financial Data & Stock Exchanges,42227666944
+MSFT,Technology,Software - Infrastructure,3509346369536
+MSI,Technology,Communication Equipment,61475168256
+MTB,Financial Services,Banks - Regional,29472391168
+MTD,Healthcare,Diagnostics & Research,29917016064
+MU,Technology,Semiconductors,232765784064
+NCLH,Consumer Cyclical,Travel Services,8285686784
+NDAQ,Financial Services,Financial Data & Stock Exchanges,50298896384
+NDSN,Industrials,Specialty Industrial Machinery,13193708544
+NEE,Utilities,Utilities - Regulated Electric,173856260096
+NEM,Basic Materials,Gold,91709562880
+NFLX,Communication Services,Entertainment,441995165696
+NI,Utilities,Utilities - Regulated Gas,20244887552
+NKE,Consumer Cyclical,Footwear & Accessories,92831039488
+NOC,Industrials,Aerospace & Defense,81141792768
+NPSNY,Consumer Cyclical,Internet Retail,52077191168
+NRG,Utilities,Utilities - Independent Power Producers,30794182656
+NSC,Industrials,Railroads,64239648768
+NTAP,Technology,Software - Infrastructure,21470611456
+NTRS,Financial Services,Asset Management,24238680064
+NUE,Basic Materials,Steel,34866618368
+NVDA,Technology,Semiconductors,4347678687232
+NVR,Consumer Cyclical,Residential Construction,20416077824
+NWS,Communication Services,Entertainment,16202987520
+NWSA,Communication Services,Entertainment,15007307776
+NXPI,Technology,Semiconductors,48242126848
+O,Real Estate,REIT - Retail,52131057664
+ODFL,Industrials,Trucking,28221378560
+OGN,Healthcare,Drug Manufacturers - General,1871876864
+OKE,Energy,Oil & Gas Midstream,44416688128
+OMC,Communication Services,Advertising Agencies,14504033280
+ON,Technology,Semiconductors,19099084800
+ORCL,Technology,Software - Infrastructure,566623535104
+ORLY,Consumer Cyclical,Auto Parts,84967022592
+OTIS,Industrials,Specialty Industrial Machinery,34561368064
+OXY,Energy,Oil & Gas E&P,40827117568
+PANW,Technology,Software - Infrastructure,127481298944
+PARA,,,
+PAYC,Technology,Software - Application,9121443840
+PAYX,Technology,Software - Application,40113799168
+PCAR,Industrials,Farm & Heavy Construction Machinery,54090797056
+PCG,Utilities,Utilities - Regulated Electric,34441256960
+PDD,Consumer Cyclical,Internet Retail,160760758272
+PEAK,,,
+PEG,Utilities,Utilities - Regulated Electric,40566243328
+PENN,Consumer Cyclical,Resorts & Casinos,2014865152
+PEP,Consumer Defensive,Beverages - Non-Alcoholic,200337080320
+PFE,Healthcare,Drug Manufacturers - General,142370127872
+PFG,Financial Services,Asset Management,18777153536
+PG,Consumer Defensive,Household & Personal Products,353226063872
+PGR,Financial Services,Insurance - Property & Casualty,133060026368
+PH,Industrials,Specialty Industrial Machinery,106242605056
+PHM,Consumer Cyclical,Residential Construction,23738843136
+PKG,Consumer Cyclical,Packaging & Containers,17753712640
+PLD,Real Estate,REIT - Industrial,116842184704
+PM,Consumer Defensive,Tobacco,241652596736
+PNC,Financial Services,Banks - Regional,73475293184
+PNR,Industrials,Specialty Industrial Machinery,17178357760
+PNW,Utilities,Utilities - Regulated Electric,10670399488
+PODD,Healthcare,Medical Devices,23311896576
+POOL,Industrials,Industrial Distribution,8955575296
+PPG,Basic Materials,Specialty Chemicals,22276589568
+PPL,Utilities,Utilities - Regulated Electric,26719379456
+PRU,Financial Services,Insurance - Life,37569908736
+PSA,Real Estate,REIT - Industrial,47289036800
+PSX,Energy,Oil & Gas Refining & Marketing,54039494656
+PTC,Technology,Software - Application,20645425152
+PYPL,Financial Services,Credit Services,57867272192
+QCOM,Technology,Semiconductors,176200712192
+QRVO,Technology,Semiconductors,7568927232
+RCL,Consumer Cyclical,Travel Services,72020762624
+REG,Real Estate,REIT - Retail,13039912960
+REGN,Healthcare,Biotechnology,80115908608
+RF,Financial Services,Banks - Regional,22227400704
+RHI,Industrials,Staffing & Employment Services,2774413312
+RIVN,Consumer Cyclical,Auto Manufacturers,18217068544
+RJF,Financial Services,Asset Management,30503757824
+RL,Consumer Cyclical,Apparel Manufacturing,20610545664
+RMD,Healthcare,Medical Instruments & Supplies,36601044992
+ROK,Industrials,Specialty Industrial Machinery,42582282240
+ROL,Consumer Cyclical,Personal Services,29018191872
+ROP,Technology,Software - Application,47764111360
+ROST,Consumer Cyclical,Apparel Retail,56910270464
+RSG,Industrials,Waste Management,68375261184
+RTX,Industrials,Aerospace & Defense,227502178304
+SBAC,Real Estate,REIT - Specialty,20781916160
+SBUX,Consumer Cyclical,Restaurants,97051484160
+SCHW,Financial Services,Capital Markets,164295507968
+SEDG,Technology,Solar,2060111872
+SEE,Consumer Cyclical,Packaging & Containers,6286630912
+SGEN,,,
+SHW,Basic Materials,Specialty Chemicals,84040286208
+SIRI,Communication Services,Entertainment,6909914112
+SJM,Consumer Defensive,Packaged Foods,11259551744
+SLB,Energy,Oil & Gas Equipment & Services,54065090560
+SNPS,Technology,Software - Infrastructure,72137351168
+SO,Utilities,Utilities - Regulated Electric,98295627776
+SPG,Real Estate,REIT - Retail,69059059712
+SPGI,Financial Services,Financial Data & Stock Exchanges,150696083456
+SRE,Utilities,Utilities - Diversified,60373041152
+STE,Healthcare,Medical Devices,25931593728
+STLD,Basic Materials,Steel,23281879040
+STT,Financial Services,Asset Management,32443398144
+STX,Technology,Computer Hardware,51742433280
+STZ,Consumer Defensive,Beverages - Brewers,23265757184
+SWK,Industrials,Tools & Accessories,10245640192
+SWKS,Technology,Semiconductors,9308840960
+SYF,Financial Services,Credit Services,27762933760
+SYK,Healthcare,Medical Devices,140835160064
+SYY,Consumer Defensive,Food Distribution,36695121920
+T,Communication Services,Telecom Services,183829430272
+TAP,Consumer Defensive,Beverages - Brewers,9118520320
+TDG,Industrials,Aerospace & Defense,75916230656
+TDY,Technology,Scientific & Technical Instruments,23234635776
+TEAM,Technology,Software - Application,38505480192
+TER,Technology,Semiconductor Equipment & Materials,25278375936
+TFC,Financial Services,Banks - Regional,58643509248
+TFX,Healthcare,Medical Instruments & Supplies,4871549952
+TGT,Consumer Defensive,Discount Stores,39674032128
+TJX,Consumer Cyclical,Apparel Retail,168937668608
+TMO,Healthcare,Diagnostics & Research,220720971776
+TMUS,Communication Services,Telecom Services,235724636160
+TPR,Consumer Cyclical,Luxury Goods,21785257984
+TRGP,Energy,Oil & Gas Midstream,36698816512
+TRMB,Technology,Scientific & Technical Instruments,18330759168
+TROW,Financial Services,Asset Management,22039635968
+TRV,Financial Services,Insurance - Property & Casualty,65304576000
+TSCO,Consumer Cyclical,Specialty Retail,27963117568
+TSLA,Consumer Cyclical,Auto Manufacturers,1300694564864
+TSN,Consumer Defensive,Farm Products,18948411392
+TT,Industrials,Building Products & Equipment,91253547008
+TTWO,Communication Services,Electronic Gaming & Multimedia,43509870592
+TXN,Technology,Semiconductors,144916463616
+TXT,Industrials,Aerospace & Defense,14493436928
+TYL,Technology,Software - Application,20452886528
+UAL,Industrials,Airlines,29848641536
+UDR,Real Estate,REIT - Residential,13399245824
+UHS,Healthcare,Medical Care Facilities,14759085056
+ULTA,Consumer Cyclical,Specialty Retail,23173056512
+UNH,Healthcare,Healthcare Plans,289841184768
+UNP,Industrials,Railroads,134184861696
+UPS,Industrials,Integrated Freight & Logistics,80308183040
+URI,Industrials,Rental & Leasing Services,51472977920
+USB,Financial Services,Banks - Regional,74354728960
+V,Financial Services,Credit Services,636590161920
+VFC,Consumer Cyclical,Apparel Manufacturing,6333648384
+VICI,Real Estate,REIT - Diversified,30803144704
+VLO,Energy,Oil & Gas Refining & Marketing,53882544128
+VMC,Basic Materials,Building Materials,38031237120
+VRSK,Industrials,Consulting Services,31178795008
+VRSN,Technology,Software - Infrastructure,23484788736
+VRTX,Healthcare,Biotechnology,109417275392
+VTR,Real Estate,REIT - Healthcare Facilities,37221629952
+VZ,Communication Services,Telecom Services,173843218432
+WAB,Industrials,Railroads,34229047296
+WAT,Healthcare,Diagnostics & Research,23456092160
+WBA,,,
+WBD,Communication Services,Entertainment,57466707968
+WDAY,Technology,Software - Application,60112379904
+WDC,Technology,Computer Hardware,47713710080
+WEC,Utilities,Utilities - Regulated Electric,36153200640
+WELL,Real Estate,REIT - Healthcare Facilities,137217564672
+WFC,Financial Services,Banks - Diversified,266238001152
+WHR,Consumer Cyclical,"Furnishings, Fixtures & Appliances",4121310976
+WM,Industrials,Waste Management,87269056512
+WMB,Energy,Oil & Gas Midstream,72796856320
+WMT,Consumer Defensive,Discount Stores,840497627136
+WRB,Financial Services,Insurance - Property & Casualty,29679654912
+WRK,,,
+WST,Healthcare,Medical Instruments & Supplies,19501701120
+WTW,Financial Services,Insurance Brokers,30732492800
+WY,Real Estate,REIT - Specialty,15714509824
+WYNN,Consumer Cyclical,Resorts & Casinos,12435592192
+XEL,Utilities,Utilities - Regulated Electric,47127973888
+XOM,Energy,Oil & Gas Integrated,499140984832
+XYL,Industrials,Specialty Industrial Machinery,34180620288
+YUM,Consumer Cyclical,Restaurants,42475327488
+ZBH,Healthcare,Medical Devices,18268375040
+ZBRA,Technology,Communication Equipment,12206584832
+ZS,Technology,Software - Infrastructure,43534307328
+ZTS,Healthcare,Drug Manufacturers - Specialty & Generic,54094974976
